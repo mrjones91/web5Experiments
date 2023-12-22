@@ -12,7 +12,29 @@ const { record } = await web5.dwn.records.create({
         dataFormat: 'text/plain'
     }
 });
-console.log(web5.dwn.records.query());
+//read
+const readResult = await record.data.text();
+console.log('read Result is ' + readResult);
+
+//update
+const updateResult = await record.update({
+    data: 'Hello, Web5! I am updated.',
+  });
+
+//read
+const readResult2 = await record.data.text();
+console.log('read Result is ' + readResult2);
+
+//delete
+const deleteResult = await web5.dwn.records.delete({
+    message: {
+      recordId: record.id,
+    },
+  });
+
+console.log(deleteResult);
+
+//console.log(web5.dwn.records.query());
 // const { recorda } = await web5.dwn.records.create({
 //     data: 'TBD Hackathon Winners: C007 Devs',
 //     message: {
