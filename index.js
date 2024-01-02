@@ -1,53 +1,23 @@
-//create did with web5
-import { Web5 } from "@web5/api";
-const { web5, did: myDid } = await Web5.connect();
+//node (express) api server for todo app
+// with dwn 
 
-console.log(myDid);
-console.log();
+//import myWeb5 from './web5.js';
+//import { Web5 } from "@web5/api";
+import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
 
-//create recrod store in user dwn
-const { record } = await web5.dwn.records.create({
-    data: 'Hello, Web5!',
-    message: {
-        dataFormat: 'text/plain'
-    }
-});
-//read
-const readResult = await record.data.text();
-console.log('read Result is ' + readResult);
+dotenv.config(); 
 
-//update
-const updateResult = await record.update({
-    data: 'Hello, Web5! I am updated.',
-  });
 
-//read
-const readResult2 = await record.data.text();
-console.log('read Result is ' + readResult2);
+const PORT = process.env.PORT || 3001;
+const app = express();
+app.use(cors());
 
-//delete
-const deleteResult = await web5.dwn.records.delete({
-    message: {
-      recordId: record.id,
-    },
-  });
+app.get('/', (req, res) => res.send('idk'));
 
-console.log(deleteResult);
+app.listen(PORT, () => console.log('we live'));
 
-//console.log(web5.dwn.records.query());
-// const { recorda } = await web5.dwn.records.create({
-//     data: 'TBD Hackathon Winners: C007 Devs',
-//     message: {
-//         dataFormat: 'text/plain'
-//     }
-// });
+//import Web5 from '@web5/api';
 
-// console.log('writeResult', recorda);
-// console.log();
-
-// const readResult = await record.data.text();
-// const recordData = await recorda.data.json();
-
-// console.log('readResult', readResult);
-// console.log('json', recordData);
-
+console.log('hello world');
